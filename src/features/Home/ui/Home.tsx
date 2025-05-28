@@ -1,17 +1,15 @@
-import React, {Component} from 'react';
+import React from 'react';
 import {View, StyleSheet} from 'react-native';
 import {Header} from '../../Header/ui/Header';
 import {TweetList} from '../../TweetList/ui/TweetList';
 
-class Home extends Component {
-  render() {
-    return (
-      <View style={styles.container}>
-        <Header />
-        <TweetList />
-      </View>
-    );
-  }
+function Home() {
+  return (
+    <View style={styles.container}>
+      <Header />
+      <TweetList />
+    </View>
+  );
 }
 
 export default Home;

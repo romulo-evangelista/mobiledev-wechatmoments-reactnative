@@ -9,20 +9,16 @@ import {
   ViewStyle,
 } from 'react-native';
 
-import {BasicStyle, IUser, RootState} from './../../../types';
-import {useAppDispatch} from './../../../hooks';
+import {BasicStyle} from './../../../types';
+import {useAppDispatch, useAppSelector} from './../../../hooks';
 import {fetchUser} from '../state/user.thunk';
-import {connect} from 'react-redux';
 
-interface IHeaderProps {
-  user: IUser;
-}
-
-export function HeaderComponent({user}: IHeaderProps): ReactElement {
+export function Header(): ReactElement {
+  const user = useAppSelector(state => state.user.data);
   const dispatch = useAppDispatch();
 
   useEffect(() => {
-    dispatch(fetchUser('jsmith'));
+    dispatch(fetchUser('user'));
   }, [dispatch]);
 
   return (
@@ -50,13 +46,6 @@ export function HeaderComponent({user}: IHeaderProps): ReactElement {
   );
 }
 
-const mapStateToProps = (state: RootState) =>
-  ({
-    user: state.user.data,
-  } as IHeaderProps);
-
-export const Header = connect(mapStateToProps)(HeaderComponent);
-
 interface AdditionalStyles {
   backgroundImage: ImageStyle;
   userWrapper: ViewStyle;
@@ -66,13 +55,13 @@ const styles: Partial<BasicStyle> & AdditionalStyles = StyleSheet.create<
   Partial<BasicStyle> & AdditionalStyles
 >({
   container: {
-    height: 230,
     backgroundColor: 'white',
   },
   image: {
     marginBottom: -24,
     marginRight: 24,
     backgroundColor: '#e4f0f5',
+    zIndex: 1,
   },
   text: {
     fontWeight: 'bold',

@@ -12,7 +12,7 @@ const initialState: IUserState = {
   status: RequestStatus.IDLE,
 };
 const userSlice = createSlice({
-  name: 'tweets',
+  name: 'user',
   initialState,
   reducers: {},
   extraReducers: (builder: ActionReducerMapBuilder<IUserState>) => {
@@ -22,7 +22,7 @@ const userSlice = createSlice({
     });
     builder.addCase(fetchUser.fulfilled, (nextState, action) => {
       nextState.data = action.payload;
-      nextState.status = RequestStatus.SUCCESSFULL;
+      nextState.status = RequestStatus.SUCCESSFUL;
     });
     builder.addCase(fetchUser.rejected, nextState => {
       nextState.status = RequestStatus.FAILED;

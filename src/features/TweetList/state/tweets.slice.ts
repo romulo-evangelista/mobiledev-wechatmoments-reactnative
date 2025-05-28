@@ -1,6 +1,6 @@
 import {ActionReducerMapBuilder, createSlice} from '@reduxjs/toolkit';
 import {ITweet, RequestStatus} from '../../../types';
-import {fetchUserTweets} from './tweets.thunk';
+import {fetchTweets} from './tweets.thunk';
 
 interface ITweetsState {
   data: Array<ITweet>;
@@ -16,15 +16,15 @@ const tweetsSlice = createSlice({
   initialState,
   reducers: {},
   extraReducers: (builder: ActionReducerMapBuilder<ITweetsState>) => {
-    builder.addCase(fetchUserTweets.pending, nextState => {
+    builder.addCase(fetchTweets.pending, nextState => {
       nextState.data = [];
       nextState.status = RequestStatus.PENDING;
     });
-    builder.addCase(fetchUserTweets.fulfilled, (nextState, action) => {
+    builder.addCase(fetchTweets.fulfilled, (nextState, action) => {
       nextState.data = action.payload;
-      nextState.status = RequestStatus.SUCCESSFULL;
+      nextState.status = RequestStatus.SUCCESSFUL;
     });
-    builder.addCase(fetchUserTweets.rejected, nextState => {
+    builder.addCase(fetchTweets.rejected, nextState => {
       nextState.status = RequestStatus.FAILED;
     });
   },
